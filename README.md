@@ -1,50 +1,48 @@
+##Multi Servers Management
+Execute commands on multi servers at the same time, or use the config files to manage multi servers.
 
-Directory info:
 
-multiHosts/
-├── bin
-│   ├── __init__.py
-│   ├── main.py
-│   ├── __pycache__
-│   │   └── main.cpython-34.pyc
-│   └── start.py
-├── conf
-│   ├── __init__.py
-│   ├── __pycache__
-│   │   ├── __init__.cpython-34.pyc
-│   │   └── settings.cpython-34.pyc
-│   └── settings.py
-├── logs
-├── modules
-│   ├── handle.py
-│   ├── __init__.py
-│   └── __pycache__
-│       ├── handle.cpython-34.pyc
-│       └── __init__.cpython-34.pyc
-├── readme.md
-├── server.cfg
-
+##Prerequisites
 Before you run the program, make sure your server which will run this program has been installed python3, rabbitmq-server, and pika, paramiko module.
 
 How to install python3 and paramiko? Take Ubuntu 14.04 OS for example.
-Ubuntu 14.04 installed python3.4 by default. Check your current os's python3 version: $python3 -V
+Ubuntu 14.04 installed python3.4 by default. Check your current os's python3 version: 
+```
+$python3 -V
+```
 
 Install paramiko and pika:
+```
 $sudo apt-get install python3-pip
 $sudo apt-get install python-dev
 $sudo pip3 install paramiko
 $sudo pip3 install pika
+```
 
 Install rabbitmq-server:
+```
 $sudo wget http://www.rabbitmq.com//releases/rabbitmq-server/v3.6.1/rabbitmq-server_3.6.1-1_all.deb
 $sudo dpkg -i rabbitmq-server_3.6.1-1_all.deb
+```
 
 Start rabbitmq-server:
+```
 $sudo service rabbitmq-server start
+```
 
 
-Execution method 1: python3 bin/start.py -s remote_server01_ip remote_server02_ip -c command
-Execution method 2: python3 bin/start.py file             #here the file contains servers info and commands info, the file's content should be like below:
+
+##Execution methods
+Execution method 1: 
+```
+python3 bin/start.py -s remote_server01_ip remote_server02_ip -c command
+```
+
+Execution method 2: 
+```
+python3 bin/start.py file
+```
+Here the file contains servers info and commands info, the file's content should be like below:
 {"group1":{"server":["server1","server2",....],"command":["command1","command2",...]},
  "group2":{"server":["servern",...],"command":["commandn",...]}}
 
@@ -53,7 +51,7 @@ For example:
 
 The second execution method supports server groups, multiple commands.
 
-Used rabbitmq to send the operation message to the queue, then get the message from the queue and store into the log files.
+Use rabbitmq to send the operation message to the queue, then get the message from the queue and store into the log files.
 Under logs/ directory, it will generate the log files like serverip_log.info, for example 104.210.39.158_log.info  127.0.0.1_log.info. Remember each log file will only record the commands executed on its server.
 
 ##Before you run the program, there are 3 important things:
