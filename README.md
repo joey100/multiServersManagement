@@ -38,6 +38,13 @@ Execution method 1:
 python3 bin/start.py -s remote_server01_ip remote_server02_ip -c command
 ```
 
+Sample Output:
+![alt text][sample]
+
+[sample]: https://github.com/joey100/multiServersManagement/blob/master/sample.png "sample output"
+
+
+
 Execution method 2: 
 ```
 python3 bin/start.py file
@@ -47,12 +54,12 @@ Here the file contains servers info and commands info, the file's content should
  "group2":{"server":["servern",...],"command":["commandn",...]}}
 
 For example:
-{"APP servers":{"server":["127.0.0.1"],"command":["df","ls -l","for i in 1;do echo 1;done"]},"DB servers":{"server":["104.210.39.158"],"command":["ifconfig","whoami","exit","hostname"]}}
+{"APP servers":{"server":["server1.example.com"],"command":["df","ls -l","for i in 1;do echo 1;done"]},"DB servers":{"server":["server2.example.com"],"command":["ifconfig","whoami","exit","hostname"]}}
 
 The second execution method supports server groups, multiple commands.
 
 Use rabbitmq to send the operation message to the queue, then get the message from the queue and store into the log files.
-Under logs/ directory, it will generate the log files like serverip_log.info, for example 104.210.39.158_log.info  127.0.0.1_log.info. Remember each log file will only record the commands executed on its server.
+Under logs/ directory, it will generate the log files like servername_log.info, for example server1.example.com_log.info  server2.example.com_log.info. Remember each log file will only record the commands executed on its server.
 
 ##Before you run the program, there are 3 important things:
 1. the user/password info stores at conf/settings.py, please replace your remote server's real user/password to do the test
