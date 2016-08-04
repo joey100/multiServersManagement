@@ -39,6 +39,7 @@ python3 bin/start.py -s remote_server01_ip remote_server02_ip -c command
 ```
 
 Sample Output:
+
 ![alt text][sample]
 
 [sample]: https://github.com/joey100/multiServersManagement/blob/master/sample.png "sample output"
